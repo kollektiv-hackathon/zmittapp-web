@@ -1,0 +1,13 @@
+{
+  "name": "schiri",
+  "version": "0.0.0",
+  "dependencies": {
+    "modernizr": "2.8.x",
+    "angular": "1.2.x",
+    "jquery": "2.x.x",
+    "angular-route": "1.2.x"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.2.x"
+  }
+}
