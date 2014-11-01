@@ -7,6 +7,15 @@ var $ = require('gulp-load-plugins')({
 });
 
 gulp.task('styles', function () {
+  return gulp.src(['app/styles/**/*.scss', '!app/styles/vendor.scss'])
+    .pipe($.plumber())
+    .pipe($.rubySass({style: 'expanded'}))
+    .pipe($.autoprefixer('last 2 versions'))
+    .pipe(gulp.dest('.tmp/styles'))
+    .pipe($.size());
+});
+
+gulp.task('stylesAll', function () {
   return gulp.src('app/styles/**/*.scss')
     .pipe($.plumber())
     .pipe($.rubySass({style: 'expanded'}))
@@ -37,7 +46,7 @@ gulp.task('views', function () {
     .pipe($.size());
 });
 
-gulp.task('html', ['styles', 'scripts', 'views'], function () {
+gulp.task('html', ['scripts', 'views'], function () {
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
 
@@ -94,4 +103,4 @@ gulp.task('clean', function () {
   return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.rimraf());
 });
 
-gulp.task('build', ['html', 'views', 'images', 'misc', 'fonts']);
+gulp.task('build', ['html', 'stylesAll' 'views', 'images', 'misc', 'fonts']);
