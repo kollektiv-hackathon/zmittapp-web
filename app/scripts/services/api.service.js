@@ -8,9 +8,14 @@ zmittapp.factory('api', function($resource, $q, auth){
 
         var _cache = {};
 
+        var _urlMappings = {
+            menuitems: 'restaurants/' + auth.getId() + '/menuitems/:id'
+        };
+
         return function(entityType){
+            var restPath = _urlMappings[entityType] || entityType + '/:id';
             if(typeof _cache[entityType] === 'undefined'){
-                _cache[entityType] = $resource('http://192.168.0.30/app_dev.php/' + entityType + '/:id', {id:'@id'}, {
+                _cache[entityType] = $resource('http://192.168.0.30/app_dev.php/' + restPath, {id:'@id'}, {
                     'update':   {method:'PUT'},
                     'create':   {method:'POST'}
                 });

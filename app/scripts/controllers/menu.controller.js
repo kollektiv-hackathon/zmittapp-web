@@ -2,7 +2,7 @@
 zmittapp.controller('menuController', function($scope, messages, api, apiMock){
 
     $scope.days = [
-        'Montag', 'Dienstag', 'Mittwoch', 'Freitag', 'Samstag', 'Sonntag'
+        'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'
     ];
 
     $scope.dayDishes = apiMock('days');
