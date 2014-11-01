@@ -27,6 +27,10 @@ zmittapp.factory('api', function($resource, $q, auth){
     })();
 
     function Api(entityType) {
+        if(!(this instanceof Api)){
+            return new Api(entityType);
+        }
+
         this.res = resourceCache(entityType);
     }
 
@@ -56,14 +60,5 @@ zmittapp.factory('api', function($resource, $q, auth){
     };
 
 
-    return function(entityType){
-        var d = $q.defer();
-        if(auth.getAccessToken() !== false){
-            d.resolve(new Api(entityType));
-        }else{
-            d.reject();
-        }
-
-        return d.promise;
-    };
+    return Api;
 });
