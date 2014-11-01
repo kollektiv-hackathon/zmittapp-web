@@ -9,8 +9,8 @@ zmittapp.factory('api', function($resource, $q, auth){
         var _cache = {};
 
         var _urlMappings = {
-            menuitems: 'restaurants/' + auth.getId() + '/menuitems/:id',
-            profile: 'restaurants/' + auth.getId()
+            menuItem: 'restaurants/' + auth.getId() + '/menuitems/:id',
+            restaurant: 'restaurants/:id'
         };
 
         return function(entityType){
@@ -27,11 +27,21 @@ zmittapp.factory('api', function($resource, $q, auth){
 
     })();
 
+    var wrapModel = function(model, entityType){
+
+        var modelWrapper = {};
+        modelWrapper[entityType] = model;
+
+        modelWrapper.id = model.id;
+
+        return modelWrapper;
+    };
+
     function Api(entityType) {
         if(!(this instanceof Api)){
             return new Api(entityType);
         }
-
+        this.entityType = entityType;
         this.res = resourceCache(entityType);
     }
 
@@ -51,8 +61,14 @@ zmittapp.factory('api', function($resource, $q, auth){
             this.res.create(model);
         },
         update: function(model){
-            var m = new this.res(model);
-            m.$update();
+            var d = $q.defer();
+
+            var m = new this.res(wrapModel(model, this.entityType));
+            m.$update(function(data){
+                d.resolve(data);
+            });
+
+            return d.promise;
         },
         remove: function(model){
             var m = new this.res(model);
@@ -61,7 +77,7 @@ zmittapp.factory('api', function($resource, $q, auth){
         get: function(id){
             var d = $q.defer();
 
-            this.res.get(id, function(data){
+            this.res.get({id: id}, function(data){
                 d.resolve(data);
             });
             return d.promise;

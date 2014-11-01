@@ -1,23 +1,24 @@
 
-zmittapp.controller('profileController', function($scope, $rootScope, api, $timeout){
+zmittapp.controller('profileController', function($scope, $rootScope, api, $timeout, auth, messages){
 
     $rootScope.loading = true;
 
-    var save = function(){
+    $scope.saveProfile = function(){
       $rootScope.loading = true;
 
-      api('profile').update($scope.profile).then(function(){
+      console.log($scope.profile);
+
+      api('restaurant').update($scope.profile).then(function(){
          $rootScope.loading = false;
+         messages.success('Ihr Profil wurde gespeichert!');
       });
     }
 
-    api('profile').get().then(function(data){
+    api('restaurant').get(auth.getId()).then(function(data){
 
       $timeout(function(){
 
         $scope.profile = data;
-        $scope.profile.save = save;
-
         $rootScope.loading = false;
 
       }, 1000);
