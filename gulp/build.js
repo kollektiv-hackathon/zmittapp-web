@@ -55,7 +55,7 @@ gulp.task('html', ['styles', 'scripts', 'views'], function () {
     //.pipe($.uglify({preserveComments: $.uglifySaveLicense}))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
-    .pipe($.replace('bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap','fonts'))
+    .pipe($.replace('app/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap','fonts'))
     .pipe($.csso())
     .pipe(cssFilter.restore())
     .pipe($.useref.restore())
@@ -83,10 +83,9 @@ gulp.task('misc', function () {
 });
 
 gulp.task('fonts', function () {
-  return gulp.src($.mainBowerFiles())
-    .pipe($.filter('**/*.{eot,svg,ttf,woff}'))
+  return gulp.src('app/bower_components/bootstrap-sass-official/assets/fonts/bootstrap/**/*.{eot,svg,ttf,woff}')
     .pipe($.flatten())
-    .pipe(gulp.dest('dist/fonts'))
+    .pipe(gulp.dest('dist/fonts/bootstrap'))
     .pipe($.size());
 });
 
