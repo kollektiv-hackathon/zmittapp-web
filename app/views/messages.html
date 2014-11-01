@@ -1,7 +1,9 @@
 <div class="message" ng-repeat="m in messages">
     <div class="alert {{m.class}}" role="alert">{{m.text}} 
 
-        <span class="glyphicon glyphicon-remove"></span>
+        <a href="#" ng-click="removeMessage($index)" data-id="" class="remove pull-right">
+            <span class="glyphicon glyphicon-remove" ></span>
+        </a>
 
     </div>
 </div>
