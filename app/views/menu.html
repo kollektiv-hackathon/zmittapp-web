@@ -1,9 +1,26 @@
 <div class="view">
-  Menu
+    <div class="page-header">
+        <h1>Menü</h1>
+    </div>
+    <div class="calendar">
 
-  <ul>
-    <li ng-repeat="d in dishes">
-      {{d.name}} {{d.phone}}
-    </li>
-  </ul>
+    </div>
+    <div class="days">
+        <div class="day" ng-repeat="day in days">
+            <div id="loginbox" class="mainbox col-md-12">
+                <div class="panel panel-default" >
+                    <div class="panel-heading">
+                        <div class="panel-title">{{day}}</div>
+                    </div>
+                    <div style="padding-top:30px" class="panel-body" >
+                        <div class="dish" ng-repeat="dish in dayDishes[$index].dishes">
+                            <div class="price">{{dish.price}}</div>
+                            <div class="main">{{dish.main}}</div>
+                            <div class="dessert">{{dish.dessert}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

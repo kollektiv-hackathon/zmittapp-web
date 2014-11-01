@@ -6,16 +6,13 @@
 
 zmittapp.factory('auth', function(){
 
+	return {
+    	getAccessToken: function(){
+      		return true;
+    	},
 
+    	login: function(username, password){
 
-
-  return {
-    getAccessToken: function(){
-      return true;
-    },
-
-    login: function(username, password){
-
-    }
-  };
+    	}
+  	};
 });

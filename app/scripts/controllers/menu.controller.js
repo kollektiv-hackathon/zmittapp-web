@@ -1,14 +1,10 @@
 
-zmittapp.controller('menuController', function($scope, messages, api){
+zmittapp.controller('menuController', function($scope, messages, api, apiMock){
 
-  messages.error('Es ist ein schwuler fehler beim anmelden aufgetreten');
-  messages.success('Super du hast gewonnen!');
-  messages.info('This is an info message');
+    $scope.days = [
+        'Montag', 'Dienstag', 'Mittwoch', 'Freitag', 'Samstag', 'Sonntag'
+    ];
 
-  api('restaurants').then(function(api){
+    $scope.dayDishes = apiMock('days');
 
-    api.query().then(function(data){
-      $scope.dishes = data;
-    });
-  });
 });

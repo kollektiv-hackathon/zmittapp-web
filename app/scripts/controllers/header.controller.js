@@ -4,8 +4,6 @@
 
 zmittapp.controller('headerController', function($scope) {
 
-
-
 });
 
 

@@ -4,7 +4,7 @@
       <div class="panel panel-default" >
         <div class="panel-heading">
           <div class="panel-title">Sign In</div>
-          <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+          <div style="float:right; position: relative; top: -20px"><a href="#">Forgot password?</a></div>
         </div>
 
         <div style="padding-top:30px" class="panel-body" >
@@ -23,22 +23,11 @@
               <input id="login-password" type="password" class="form-control" name="password" placeholder="password">
             </div>
 
-
-
-            <div class="input-group">
-              <div class="checkbox">
-                <label>
-                  <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
-                </label>
-              </div>
-            </div>
-
-
             <div style="margin-top:10px" class="form-group">
               <!-- Button -->
 
               <div class="col-sm-12 controls">
-                <a id="btn-login" href="#" class="btn btn-success">Login  </a>
+                <a id="btn-login" ng-click="login()" class="btn btn-success">Login</a>
 
               </div>
             </div>
@@ -46,7 +35,7 @@
 
             <div class="form-group">
               <div class="col-md-12 control">
-                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                <div>
                   Don't have an account!
                   <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
                     Sign Up Here
