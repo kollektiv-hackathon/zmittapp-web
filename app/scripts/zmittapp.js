@@ -12,10 +12,10 @@ var zmittapp = angular.module('zmittapp', ['ngRoute', 'ngResource'])
         templateUrl: 'views/login.html',
         controller: 'loginController'
       })
-      .when('/logout', {
-        templateUrl: 'views/login.html',
-        controller: 'logoutController'
-      })
+        .when('/logout', {
+          templateUrl: 'views/login.html',
+          controller: 'logoutController'
+        })
       .when('/profile', {
         templateUrl: 'views/profile.html',
         controller: 'profileController'
@@ -37,6 +37,10 @@ zmittapp.controller('rootController', function($scope, auth, $window, $location)
       window.location.pathname = '/login';
       //$window.location.href = 'http://zmittapp.int/login';
     }
+  });
+
+  $scope.$on('$locationChangeSuccess', function(e){
+    $scope.currentLocation = window.location.pathname;
   });
 
 });
