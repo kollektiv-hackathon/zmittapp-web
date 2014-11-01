@@ -4,8 +4,8 @@
 
 'use strict';
 
-zmittapp.controller('loginController', function($scope){
+zmittapp.controller('loginController', function($scope, $location){
     $scope.login = function(){
-        window.location.pathname = '/';
+        $location.path( "/" ).replace();
     };
 });
