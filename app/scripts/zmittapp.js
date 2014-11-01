@@ -12,6 +12,10 @@ var zmittapp = angular.module('zmittapp', ['ngRoute', 'ngResource'])
         templateUrl: 'views/login.html',
         controller: 'loginController'
       })
+      .when('/profile', {
+        templateUrl: 'views/profile.html',
+        controller: 'profileController'
+      })
       .otherwise({
         templateUrl: '404.html'
         //controller: 'errorController'
