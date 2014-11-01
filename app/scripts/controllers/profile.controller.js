@@ -6,8 +6,6 @@ zmittapp.controller('profileController', function($scope, $rootScope, api, $time
     $scope.saveProfile = function(){
       $rootScope.loading = true;
 
-      console.log($scope.profile);
-
       api('restaurant').update($scope.profile).then(function(){
          $rootScope.loading = false;
          messages.success('Ihr Profil wurde gespeichert!');
@@ -22,7 +20,6 @@ zmittapp.controller('profileController', function($scope, $rootScope, api, $time
         $rootScope.loading = false;
 
       }, 1000);
-
 
     });
 
