@@ -9,7 +9,8 @@ zmittapp.factory('api', function($resource, $q, auth){
         var _cache = {};
 
         var _urlMappings = {
-            menuitems: 'restaurants/' + auth.getId() + '/menuitems/:id'
+            menuitems: 'restaurants/' + auth.getId() + '/menuitems/:id',
+            profile: 'restaurants/' + auth.getId()
         };
 
         return function(entityType){
@@ -56,6 +57,14 @@ zmittapp.factory('api', function($resource, $q, auth){
         remove: function(model){
             var m = new this.res(model);
             m.$delete();
+        },
+        get: function(id){
+            var d = $q.defer();
+
+            this.res.get(id, function(data){
+                d.resolve(data);
+            });
+            return d.promise;
         }
     };
 
