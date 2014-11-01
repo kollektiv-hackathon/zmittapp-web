@@ -7,10 +7,10 @@ var $ = require('gulp-load-plugins')({
 });
 
 gulp.task('styles', function () {
-  return gulp.src('app/styles/*.scss')
+  return gulp.src('app/styles/**/*.scss')
     .pipe($.plumber())
     .pipe($.rubySass({style: 'expanded'}))
-    .pipe($.autoprefixer('last 1 version'))
+    .pipe($.autoprefixer('last 2 versions'))
     .pipe(gulp.dest('.tmp/styles'))
     .pipe($.size());
 });
@@ -30,7 +30,7 @@ gulp.task('views', function () {
       quotes: true
     }))
     .pipe($.ngHtml2js({
-      moduleName: 'schiri',
+      moduleName: 'zmittapp',
       prefix: 'views/'
     }))
     .pipe(gulp.dest('.tmp/views'))
@@ -76,45 +76,9 @@ gulp.task('images', function () {
     .pipe($.size());
 });
 
-gulp.task('videos', function () {
-  return gulp.src('app/videos/**/*')
-    .pipe(gulp.dest('dist/videos'))
-    .pipe($.size());
-});
-
-gulp.task('videoshtaccess', function () {
-  return gulp.src('app/videos/.htaccess')
-    .pipe(gulp.dest('dist/videos'))
-    .pipe($.size());
-});
-
-gulp.task('dunnoindex', function () {
-  return gulp.src('app/robots.txt')
-    .pipe(gulp.dest('dist/'))
-    .pipe($.size());
-});
-
-gulp.task('actions', function () {
-  return gulp.src('app/actions/**/*')
-    .pipe(gulp.dest('dist/actions'))
-    .pipe($.size());
-});
-
-gulp.task('rewrite', function () {
+gulp.task('misc', function () {
   return gulp.src('app/.htaccess')
     .pipe(gulp.dest('dist/'))
-    .pipe($.size());
-});
-
-gulp.task('api', function () {
-  return gulp.src('app/api/*')
-    .pipe(gulp.dest('dist/api'))
-    .pipe($.size());
-});
-
-gulp.task('static', function () {
-  return gulp.src('app/static/**/*')
-    .pipe(gulp.dest('dist/static'))
     .pipe($.size());
 });
 
@@ -130,4 +94,4 @@ gulp.task('clean', function () {
   return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.rimraf());
 });
 
-gulp.task('build', ['html', 'views', 'images', 'videos', 'videoshtaccess', 'actions', 'rewrite', 'dunnoindex', 'api', 'static', 'fonts']);
+gulp.task('build', ['html', 'views', 'images', 'misc', 'fonts']);
