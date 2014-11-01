@@ -1,13 +1,16 @@
 
-zmittapp.controller('profileController', function($scope, $rootScope, api, $timeout, auth, messages){
+zmittapp.controller('profileController', function($scope, $rootScope, api, osmApi, $timeout, auth, messages){
 
-    $rootScope.loading = true;
+
+    osmApi().query('Schiffbaustrasse 10 Zürich').then(function(data){
+      console.log(data);
+    });
+
+    return;
 
     $scope.saveProfile = function(){
-      $rootScope.loading = true;
 
       api('restaurant').update($scope.profile).then(function(){
-         $rootScope.loading = false;
          messages.success('Ihr Profil wurde gespeichert!');
       });
     }
@@ -15,10 +18,7 @@ zmittapp.controller('profileController', function($scope, $rootScope, api, $time
     api('restaurant').get(auth.getId()).then(function(data){
 
       $timeout(function(){
-
         $scope.profile = data;
-        $rootScope.loading = false;
-
       }, 1000);
 
     });

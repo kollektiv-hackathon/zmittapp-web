@@ -2,7 +2,7 @@
  * Created by remo on 01/11/14.
  */
 
-zmittapp.factory('api', function($resource, $q, auth){
+zmittapp.factory('api', function($rootScope, $resource, $q, auth){
 
     var resourceCache = (function(){
 
@@ -51,9 +51,11 @@ zmittapp.factory('api', function($resource, $q, auth){
 
         query: function(filters){
             var d = $q.defer();
+            $rootScope.loading = true;
 
             this.res.query(function(data){
                 d.resolve(data);
+                $rootScope.loading = false;
             });
             return d.promise;
         },
@@ -62,10 +64,12 @@ zmittapp.factory('api', function($resource, $q, auth){
         },
         update: function(model){
             var d = $q.defer();
+            $rootScope.loading = true;
 
             var m = new this.res(wrapModel(model, this.entityType));
             m.$update(function(data){
                 d.resolve(data);
+                $rootScope.loading = false;
             });
 
             return d.promise;
@@ -76,9 +80,11 @@ zmittapp.factory('api', function($resource, $q, auth){
         },
         get: function(id){
             var d = $q.defer();
+            $rootScope.loading = true;
 
             this.res.get({id: id}, function(data){
                 d.resolve(data);
+                $rootScope.loading = false;
             });
             return d.promise;
         }
