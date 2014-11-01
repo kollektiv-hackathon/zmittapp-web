@@ -28,7 +28,10 @@ var zmittapp = angular.module('zmittapp', ['ngRoute', 'ngResource'])
       $locationProvider.html5Mode(true);
   });
 
-zmittapp.controller('rootController', function($scope, auth, $window, $location){
+zmittapp.controller('rootController', function($scope, $rootScope, auth, $window, $location){
+
+  // remove loading
+  $rootScope.loading = false;
 
   $scope.$on('$locationChangeStart', function(event) {
 

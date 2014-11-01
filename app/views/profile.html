@@ -11,7 +11,7 @@
       <div class="row">
 
         <div class="form-group col-sm-6">
-          <input type="text" class="form-control input-lg" placeholder="E-Mail">
+          <input type="text" class="form-control input-lg" placeholder="E-Mail"  ng-model="profile.email">
         </div>
 
         <div class="form-group  col-sm-6">
@@ -25,22 +25,22 @@
       <div class="row">
 
         <div class="form-group col-sm-6">
-          <input type="text" class="form-control input-lg" placeholder="Restaurant Name">
+          <input type="text" class="form-control input-lg" placeholder="Restaurant Name" ng-model="profile.name">
         </div>
 
         <div class="form-group  col-sm-6">
-          <input type="text" class="form-control input-lg" placeholder="Restaurant Standort">
+          <input type="text" class="form-control input-lg" placeholder="Restaurant Standort" ng-model="profile.lat">
         </div>
 
         <div class="form-group col-sm-6">
           <div class="input-group input-group-lg">
             <span class="input-group-addon">+41</span>
-            <input type="text" class="form-control" placeholder="Telefon">
+            <input type="text" class="form-control" placeholder="Telefon" ng-model="profile.phone">
           </div>
         </div>
 
         <div class="form-group  col-sm-6">
-          <input type="text" class="form-control input-lg" placeholder="E-Mail">
+          <input type="text" class="form-control input-lg" placeholder="E-Mail" ng-model="profile.email">
         </div>
 
         <div class="form-group  col-sm-6">
@@ -53,7 +53,7 @@
 
       </div>
 
-      <button type="button" class="btn btn-primary btn-lg">Speichern</button>
+      <button type="button" class="btn btn-primary btn-lg" ng-click="">Speichern</button>
 
   </div>
 
