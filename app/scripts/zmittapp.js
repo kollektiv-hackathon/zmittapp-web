@@ -12,6 +12,10 @@ var zmittapp = angular.module('zmittapp', ['ngRoute', 'ngResource'])
         templateUrl: 'views/login.html',
         controller: 'loginController'
       })
+      .when('/logout', {
+        templateUrl: 'views/login.html',
+        controller: 'logoutController'
+      })
       .when('/profile', {
         templateUrl: 'views/profile.html',
         controller: 'profileController'
