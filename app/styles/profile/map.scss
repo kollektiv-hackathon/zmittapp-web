@@ -1,0 +1,10 @@
+.map {
+    width: 100%;
+    position: relative;
+
+    &:before{
+        content: '';
+        display: block;
+        padding-top: 56.25%;
+    }
+}
