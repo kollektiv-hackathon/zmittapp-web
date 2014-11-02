@@ -13,7 +13,8 @@ zmittapp.directive('zMap', function($rootScope){
         zoom: 8,
         center: new google.maps.LatLng(47.368650, 8.539183),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        styles: map_style
+        styles: map_style,
+        scrollwheel: false
     }
 
     var map = element.find('.map')[0];
