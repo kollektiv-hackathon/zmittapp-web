@@ -20,12 +20,12 @@ zmittapp.directive('zMap', function($rootScope){
 
     $scope.map = new google.maps.Map(map, mapOptions);
 
-    var input = $('.addressSuggestion')[0];
+    var $input = $('.addressSuggestion')[0];
     var options = {
       address: true
     };
 
-     $scope.autocomplete = new google.maps.places.Autocomplete(input, options);
+     $scope.autocomplete = new google.maps.places.Autocomplete($input, options);
 
      // prepare marker
      $scope.marker = new google.maps.Marker({
@@ -43,6 +43,18 @@ zmittapp.directive('zMap', function($rootScope){
       $scope.marker.setPosition(pos);
       $scope.map.setZoom(15); 
       $scope.map.setCenter(pos); 
+
+      var geocoder = new google.maps.Geocoder();
+
+      // set address
+      geocoder.geocode({'latLng': pos}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          console.log(results);
+          if (results[0]) {
+            $input.value = results[0].formatted_address;
+          }
+        }
+      });
 
       unregister();
 
@@ -78,6 +90,13 @@ zmittapp.directive('zMap', function($rootScope){
       $scope.marker.setPosition(place.geometry.location);
       $scope.marker.setVisible(true);
 
+     });
+
+     // responsive
+     google.maps.event.addDomListener(window, "resize", function() {
+        var center = $scope.map.getCenter();
+        google.maps.event.trigger(map, "resize");
+        $scope.map.setCenter(center); 
      });
 
   }
