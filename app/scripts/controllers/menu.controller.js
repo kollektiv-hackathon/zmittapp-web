@@ -45,7 +45,11 @@ zmittapp.controller('menuController', function($scope, api, $modal){
     function openDishDialog(model){
         var newScope = $scope.$new(true);
         newScope.dish = model;
-        $modal.open({templateUrl: 'views/dish.html', controller: 'dishController', scope: newScope});
+        $modal.open({templateUrl: 'views/dish.html', controller: 'dishController', scope: newScope}).result.then(function(){
+            // saved
+        }, function(){
+            // canceled
+        });
     }
 
     /**

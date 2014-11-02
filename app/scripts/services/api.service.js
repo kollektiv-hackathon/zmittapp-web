@@ -59,8 +59,18 @@ zmittapp.factory('api', function($rootScope, $resource, $q, auth){
             });
             return d.promise;
         },
+
         create: function(model){
-            this.res.create(model);
+            var d = $q.defer();
+            $rootScope.loading += 1;
+
+            var m = new this.res(wrapModel(model, this.entityType));
+            m.$create(function(data){
+                d.resolve(data);
+                $rootScope.loading -= 1;
+            });
+
+            return d.promise;
         },
         update: function(model){
             var d = $q.defer();

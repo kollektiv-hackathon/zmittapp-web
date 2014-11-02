@@ -1,7 +1,40 @@
 <div class="view">
-    <form>
-        <input type="text" ng-model="dish.appetizer" />
-        <input type="text" ng-model="dish.main_course" />
-        <input type="text" ng-model="dish.desert" />
-    </form>
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title">Menü</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="form-group col-sm-12">
+                <textarea class="form-control input-lg" placeholder="Vorspeise" ng-model="dish.appetizer"></textarea>
+            </div>
+            <div class="form-group  col-sm-12">
+                <textarea class="form-control input-lg" placeholder="Hauptgang" ng-model="dish.main_course"></textarea>
+            </div>
+            <div class="form-group  col-sm-12">
+                <textarea class="form-control input-lg" placeholder="Nachspeise" ng-model="dish.desert"></textarea>
+            </div>
+            <div class="form-group col-sm-4">
+                <input type="text" class="form-control input-lg" placeholder="Preis"  ng-model="dish.price">
+            </div>
+            <div class="form-group  col-sm-4">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Vegi
+                    </label>
+                </div>
+            </div>
+            <div class="form-group  col-sm-4">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Vegan
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="close()" data-dismiss="modal">Abbrechen</button>
+        <button type="button" class="btn btn-primary" ng-click="save()">Speichern</button>
+    </div>
 </div>
