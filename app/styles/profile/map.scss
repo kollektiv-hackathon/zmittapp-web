@@ -6,7 +6,7 @@
     .map {
         width: 100%;
         position: relative;
-        border-radius: 6px;
+        border-radius: 0 6px 6px 6px;
         border: 1px solid #ccc;
 
         &:before{
@@ -17,8 +17,27 @@
     }
 }
 
+.mapIcon .glyphicon{
+    top: 3px;
+}
+
 .addressSuggestion{
     border-radius: 6px 6px 0 0;
+}
+
+.mapSearch{
+    margin-bottom: 0;
+    margin-left: 1px;
+
+    .mapIcon{
+        border-radius: 6px 0 0 0;
+        border-bottom: none;
+    }
+
+    .addressSuggestion{
+        border-radius: 0 6px 0 0;
+        border-bottom: none;
+    }
 }
 
 .pac-container{

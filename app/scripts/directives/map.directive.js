@@ -13,7 +13,8 @@ zmittapp.directive('zMap', function($rootScope){
         zoom: 8,
         center: new google.maps.LatLng(47.368650, 8.539183),
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-        styles: map_style
+        styles: map_style,
+        scrollwheel: false
     }
 
     var map = element.find('.map')[0];
@@ -49,7 +50,7 @@ zmittapp.directive('zMap', function($rootScope){
       // set address
       geocoder.geocode({'latLng': pos}, function(results, status) {
         if (status == google.maps.GeocoderStatus.OK) {
-          console.log(results);
+          
           if (results[0]) {
             $input.value = results[0].formatted_address;
           }
@@ -81,11 +82,6 @@ zmittapp.directive('zMap', function($rootScope){
 
       $scope.profile.lat = place.geometry.location.lat();
       $scope.profile.lon = place.geometry.location.lng();
-
-      console.log(place);
-
-      console.log($scope.profile.lat);
-      console.log($scope.profile.lon);
 
       $scope.marker.setPosition(place.geometry.location);
       $scope.marker.setVisible(true);
