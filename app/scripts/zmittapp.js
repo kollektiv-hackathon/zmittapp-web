@@ -1,6 +1,6 @@
 'use strict';
 
-var zmittapp = angular.module('zmittapp', ['ngRoute', 'ngResource'])
+var zmittapp = angular.module('zmittapp', ['ngRoute', 'ngResource', 'ui.bootstrap'])
   .config(function ($routeProvider, $locationProvider) {
 
     $routeProvider

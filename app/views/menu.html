@@ -2,21 +2,29 @@
     <div class="page-header">
         <h1>Menü</h1>
     </div>
-    <div class="calendar">
+    <div class="menu-calendar">
 
     </div>
     <div class="days">
-        <div class="day" ng-repeat="day in days">
+        <div class="day" ng-repeat="(i, day) in days">
             <div id="loginbox" class="mainbox col-md-12">
                 <div class="panel panel-default" >
                     <div class="panel-heading">
                         <div class="panel-title">{{day}}</div>
                     </div>
-                    <div style="padding-top:30px" class="panel-body" >
-                        <div class="dish" ng-repeat="dish in dayDishes[$index].dishes">
-                            <div class="price">{{dish.price}}</div>
-                            <div class="main">{{dish.main}}</div>
-                            <div class="dessert">{{dish.dessert}}</div>
+                    <div class="panel-body" >
+                        <div class="dishes">
+                            <div class="dish" ng-repeat="(j, dish) in dayDishes[$index]">
+                                <div class="price">{{dish.appetizer}}</div>
+                                <div class="main">{{dish.main_course}}</div>
+                                <div class="dessert">{{dish.desert}}</div>
+                                <div class="col-sm-12 controls">
+                                    <a ng-click="editDish(i, j)" class="btn btn-success">bearbeiten</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 controls">
+                            <a ng-click="addDish(i)" class="btn btn-success">Menü hinzufügen</a>
                         </div>
                     </div>
                 </div>
