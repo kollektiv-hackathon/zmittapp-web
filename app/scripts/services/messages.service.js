@@ -19,7 +19,6 @@ zmittapp.factory('messages', function($rootScope, $timeout){
 
     $timeout(function(){
       $rootScope.messages.splice(id-1, 1);
-      console.log('removing message');
     }, ms);
   };
 
