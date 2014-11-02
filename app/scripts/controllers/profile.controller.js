@@ -6,8 +6,6 @@ zmittapp.controller('profileController', function($scope, $rootScope, api, osmAp
       console.log(data);
     });
 
-    return;
-
     $scope.saveProfile = function(){
 
       api('restaurant').update($scope.profile).then(function(){
@@ -17,9 +15,7 @@ zmittapp.controller('profileController', function($scope, $rootScope, api, osmAp
 
     api('restaurant').get(auth.getId()).then(function(data){
 
-      $timeout(function(){
-        $scope.profile = data;
-      }, 1000);
+      $scope.profile = data;
 
     });
 

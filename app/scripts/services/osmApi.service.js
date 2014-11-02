@@ -23,18 +23,18 @@ zmittapp.factory('osmApi', function($rootScope, $q, $http){
 
         query: function(filters){
             var d = $q.defer();
-            $rootScope.loading = true;
+            $rootScope.loading += 1;
 
             var url = requestQuery(this.request, filters);
 
             $http.get(url).
               success(function(data, status, headers, config) {
                 d.resolve(data);
-                $rootScope.loading = false;
+                $rootScope.loading -= 1;
               }).
               error(function(data, status, headers, config) {
                 d.reject(data);
-                $rootScope.loading = false;
+                $rootScope.loading -= 1;
               });
 
             return d.promise;

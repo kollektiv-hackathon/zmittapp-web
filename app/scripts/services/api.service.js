@@ -16,7 +16,7 @@ zmittapp.factory('api', function($rootScope, $resource, $q, auth){
         return function(entityType){
             var restPath = _urlMappings[entityType] || entityType + '/:id';
             if(typeof _cache[entityType] === 'undefined'){
-                _cache[entityType] = $resource('http://192.168.0.30/app_dev.php/' + restPath, {id:'@id'}, {
+                _cache[entityType] = $resource('http://api.zmittapp.ch/app_dev.php/' + restPath, {id:'@id'}, {
                     'update':   {method:'PUT'},
                     'create':   {method:'POST'}
                 });
@@ -51,11 +51,11 @@ zmittapp.factory('api', function($rootScope, $resource, $q, auth){
 
         query: function(filters){
             var d = $q.defer();
-            $rootScope.loading = true;
+            $rootScope.loading += 1;
 
             this.res.query(function(data){
                 d.resolve(data);
-                $rootScope.loading = false;
+                $rootScope.loading -= 1;
             });
             return d.promise;
         },
@@ -64,12 +64,12 @@ zmittapp.factory('api', function($rootScope, $resource, $q, auth){
         },
         update: function(model){
             var d = $q.defer();
-            $rootScope.loading = true;
+            $rootScope.loading += 1;
 
             var m = new this.res(wrapModel(model, this.entityType));
             m.$update(function(data){
                 d.resolve(data);
-                $rootScope.loading = false;
+                $rootScope.loading -= 1;
             });
 
             return d.promise;
@@ -80,11 +80,11 @@ zmittapp.factory('api', function($rootScope, $resource, $q, auth){
         },
         get: function(id){
             var d = $q.defer();
-            $rootScope.loading = true;
+            $rootScope.loading += 1;
 
             this.res.get({id: id}, function(data){
                 d.resolve(data);
-                $rootScope.loading = false;
+                $rootScope.loading -= 1;
             });
             return d.promise;
         }

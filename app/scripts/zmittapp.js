@@ -30,8 +30,13 @@ var zmittapp = angular.module('zmittapp', ['ngRoute', 'ngResource'])
 
 zmittapp.controller('rootController', function($scope, $rootScope, auth, $window, $location){
 
-  // remove loading
-  $rootScope.loading = false;
+  // reset loading
+  $rootScope.loading = 0;
+
+  // watch for change in loading and set showLoading
+  $rootScope.$watch('loading', function(newValue){
+    $rootScope.showLoading = newValue >= 1;
+  });
 
   $scope.$on('$locationChangeStart', function(event) {
 
