@@ -28,10 +28,6 @@
           <input type="text" class="form-control input-lg" placeholder="Restaurant Name" ng-model="profile.name">
         </div>
 
-        <div class="form-group  col-sm-6">
-          <input type="text" class="form-control input-lg" placeholder="Restaurant Standort" ng-model="profile.lat">
-        </div>
-
         <div class="form-group col-sm-6">
           <div class="input-group input-group-lg">
             <span class="input-group-addon">+41</span>
@@ -48,10 +44,16 @@
         </div>
 
         <div class="form-group  col-sm-6">
+          <input type="text" class="form-control input-lg addressSuggestion" placeholder="Restaurant Standort">
+        </div>
+
+        <div class="form-group  col-sm-6">
           <input type="text" class="form-control input-lg" placeholder="Mittagsmenü Verfügbarkeit (von - bis)">
         </div>
 
-        <div class="map" z-map></div>
+        <div class="map-container" z-map>
+
+        </div>
 
       </div>
 
