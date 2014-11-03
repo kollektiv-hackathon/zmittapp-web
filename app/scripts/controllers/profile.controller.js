@@ -1,5 +1,5 @@
 
-zmittapp.controller('profileController', function($scope, $rootScope, api, osmApi, $timeout, auth, messages){
+zmittapp.controller('profileController', function($scope, $rootScope, api, $timeout, auth, messages){
 
     $scope.hstep = 1;
     $scope.mstep = 30;
