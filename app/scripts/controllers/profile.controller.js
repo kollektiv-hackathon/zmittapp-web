@@ -4,11 +4,6 @@ zmittapp.controller('profileController', function($scope, $rootScope, api, osmAp
     $scope.hstep = 1;
     $scope.mstep = 30;
 
-
-    osmApi().query('Schiffbaustrasse 10 Zürich').then(function(data){
-      console.log(data);
-    });
-
     $scope.saveProfile = function(){
 
       api('restaurant').update($scope.profile).then(function(){
