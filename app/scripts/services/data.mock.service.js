@@ -9,6 +9,7 @@ zmittapp.factory('data', function($q){
     var _data = {
         "menuItem": [
             {
+                id: 1,
                 date: "2014-11-10T15:15:28.144Z",
                 appetizer: "Vorspeise mit Vorspeise",
                 main_course: "Hauptgang mit Reis und Hauptgang",
@@ -16,6 +17,7 @@ zmittapp.factory('data', function($q){
                 price: 50.50
             },
             {
+                id: 2,
                 date: "2014-11-13T15:15:28.144Z",
                 appetizer: "Vorspeise mit Vorspeise",
                 main_course: "Hauptgang mit Reis und Hauptgang",
@@ -62,6 +64,7 @@ zmittapp.factory('data', function($q){
         },
 
         create: function(model){
+            model.id = Math.random();
             this.data().push(model);
             return getPromise(model);
         },
@@ -74,7 +77,7 @@ zmittapp.factory('data', function($q){
 
         remove: function(model){
             var i = this.getIndex(model);
-            this.data()[i].splice(i, 1);
+            this.data().splice(i, 1);
             return getPromise(true);
         }
     };

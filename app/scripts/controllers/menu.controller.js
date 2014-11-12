@@ -1,6 +1,10 @@
 
 zmittapp.controller('menuController', function($scope, data, $modal, $q){
 
+    /**
+     * Hardcoded collection of weekdays
+     * @type {string[]}
+     */
     $scope.days = [
         'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'
     ];
@@ -21,7 +25,7 @@ zmittapp.controller('menuController', function($scope, data, $modal, $q){
     };
 
     /**
-     * Loads the dishes from the given start date into the scope.
+     * Loads the dishes beginning by the current start date into the scope.
      */
     $scope.updateDishes = function(){
 
@@ -42,19 +46,20 @@ zmittapp.controller('menuController', function($scope, data, $modal, $q){
         });
     };
 
+    /**
+     * Just here for some debugging...ignore and go further
+     */
     $scope.data = data;
 
     /**
      * Opens a dialog for editing/creating a dish.
-     * @param model
+     * @param {scope} scope The scope used behind the dialog view
      */
-    function openDishDialog(model){
-        var d = $q.defer(),
-            newScope = $scope.$new(true);
+    function openDishDialog(scope){
+        var d = $q.defer();
 
-        newScope.dish = angular.copy(model);
-        $modal.open({templateUrl: 'views/dish.html', controller: 'dishController', scope: newScope}).result.then(function(){
-            d.resolve(newScope.dish);
+        $modal.open({templateUrl: 'views/dish.html', controller: 'dishController', scope: scope}).result.then(function(){
+            d.resolve(scope);
         }, function(){
             d.reject();
         });
@@ -63,25 +68,55 @@ zmittapp.controller('menuController', function($scope, data, $modal, $q){
     }
 
     /**
-     * Adds a dish to the day with the given index (0 = Mon, 6 = Sun)
-     * @param {number} index Index of the day.
+     * Opens a dialog for creating a new menu item.
+     * @param {number} index Index of the day (MO = 0, SO = 6)
      */
     $scope.addDish = function(index){
         var dish = {
             date: $scope.currentStartDate.changeDay(index)
         };
 
-        openDishDialog(dish).then(function(newDish){
+        openDishDialog(getDialogScope(dish)).then(function(scope){
             $scope.dayDishes[index] = $scope.dayDishes[index] || [];
-            $scope.dayDishes[index].push(newDish);
+            $scope.dayDishes[index].push(scope.dish);
         });
     };
 
+    /**
+     * Opens a dialog for updating an existing menu item.
+     * @param {number} dayIndex The index of the day (MO = 0, SO = 6)
+     * @param {number} dishIndex The index of the dish to edit
+     */
     $scope.editDish = function(dayIndex, dishIndex){
-        openDishDialog($scope.dayDishes[dayIndex][dishIndex]).then(function(updatedDish){
-            $scope.dayDishes[dayIndex][dishIndex] = updatedDish;
+
+        var dish = $scope.dayDishes[dayIndex][dishIndex],
+            ext = {
+                removeFromScope: function(){
+                    $scope.dayDishes[dayIndex].splice(dishIndex, 1);
+                }
+            };
+
+        openDishDialog(getDialogScope(dish, ext)).then(function(scope){
+            if(scope){
+                $scope.dayDishes[dayIndex][dishIndex] = scope.dish;
+            }
         });
     };
+
+    /**
+     * Returns a new scope containing the data and the provided extensions.
+     * @param data
+     * @param extensions
+     */
+    function getDialogScope(data, extensions){
+        var newScope = $scope.$new(true);
+        newScope.dish = angular.copy(data);
+        angular.extend(newScope, extensions);
+
+        return newScope;
+    }
+
+
 
 
     // Initially call updateDishes.

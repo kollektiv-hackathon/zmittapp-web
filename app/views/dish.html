@@ -34,8 +34,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-danger" ng-click="delete()" data-dismiss="modal">Abbrechen</button>
-        <button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal" ng-show="dish">Abbrechen</button>
+        <button type="button" class="btn btn-danger pull-left" ng-click="remove()" data-dismiss="modal" ng-show="dish.id">Löschen</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal">Abbrechen</button>
         <button type="button" class="btn btn-primary" ng-click="save()">Speichern</button>
     </div>
 </div>

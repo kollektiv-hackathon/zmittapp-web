@@ -17,6 +17,13 @@ zmittapp.controller('dishController', function($scope, data){
         });
     };
 
+    $scope.remove = function(){
+        data.menuItem.remove($scope.dish).then(function(){
+            $scope.removeFromScope();
+            $scope.$dismiss();
+        });
+    };
+
     $scope.cancel = function(){
         $scope.$dismiss();
     };
