@@ -1,10 +1,10 @@
 <div class="view">
     <div class="page-header">
-        <h1>Menü</h1>
+        <h1>Menü<span class="pull-right">KW {{currentStartDate.getWeek()}}</span></h1>
     </div>
     <div class="menu-calendar" style="text-align: center; margin: 0 15px 20px 15px;">
         <button class="btn btn-default pull-left" ng-click="changeWeek(-1)">Vorherige Woche</button>
-        KW {{currentStartDate.getWeek()}} ({{currentStartDate | date :'dd.MM.yyyy'}} - {{currentStartDate.getLastDateOfWeek() | date :'dd.MM.yyyy'}})
+        {{currentStartDate | date :'dd.MM.yyyy'}} - {{currentStartDate.getLastDateOfWeek() | date :'dd.MM.yyyy'}}
         <button class="btn btn-default pull-right" ng-click="changeWeek(1)">Nächste Woche</button>
     </div>
     <div class="days">
