@@ -59,7 +59,15 @@
      */
     Date.prototype.getFirstDateOfWeek = function(){
         // Monday = 0, Tuesday = 1, ... Sunday = 6
-        return this.changeDay(-1 * this.getNormalizedDay());
+        var mo = this.changeDay(-1 * this.getNormalizedDay());
+        mo.setHours(0, 0, 0, 0);
+        return mo;
+    };
+
+    Date.prototype.getLastDateOfWeek = function(){
+        var so = this.changeDay(6 - this.getNormalizedDay());
+        so.setHours(23, 59, 59, 999);
+        return so;
     };
 
     /**

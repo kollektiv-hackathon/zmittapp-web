@@ -3,25 +3,30 @@
         <h1>Menü</h1>
     </div>
     <div class="menu-calendar">
-
+        <button class="btn btn-default" ng-click="changeWeek(-1)">Vorherige Woche</button>
+        <span>KW {{currentStartDate.getWeek()}} ({{currentStartDate | date :'dd.MM.yyyy'}} - {{currentStartDate.getLastDateOfWeek() | date :'dd.MM.yyyy'}})</span>
+        <button class="btn btn-default" ng-click="changeWeek(1)">Nächste Woche</button>
     </div>
     <div class="days">
         <div class="day" ng-repeat="(i, day) in days">
             <div id="loginbox" class="mainbox col-md-12">
                 <div class="panel panel-default" >
                     <div class="panel-heading">
-                        <div class="panel-title">{{day}}</div>
+                        <div class="panel-title">{{day}} ({{currentStartDate.changeDay(i) | date :'dd.MM.yyyy'}})</div>
                     </div>
-                    <div class="panel-body" >
-                        <div class="dishes">
-                            <div class="dish" ng-repeat="(j, dish) in dayDishes[$index]">
+                    <div class="panel-body" style="text-align: center">
+                        <div class="dishes" style="margin-bottom: 20px;">
+                            <div style="cursor: pointer" class="dish" ng-repeat="(j, dish) in dayDishes[$index]" ng-click="editDish(i, j)">
                                 <div class="price">{{dish.appetizer}}</div>
+                                <div>***</div>
                                 <div class="main">{{dish.main_course}}</div>
+                                <div>***</div>
                                 <div class="dessert">{{dish.desert}}</div>
-                                <div class="col-sm-12 controls">
-                                    <a ng-click="editDish(i, j)" class="btn btn-success">bearbeiten</a>
+                                <div>
+                                    <strong>{{dish.price}}.-</strong>
                                 </div>
                             </div>
+                            <div style="color: #bbb" ng-hide="dayDishes[$index].length">Noch keine Menüs erstellt</div>
                         </div>
                         <div class="col-sm-12 controls">
                             <a ng-click="addDish(i)" class="btn btn-success">Menü hinzufügen</a>

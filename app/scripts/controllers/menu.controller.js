@@ -1,5 +1,5 @@
 
-zmittapp.controller('menuController', function($scope, api, $modal){
+zmittapp.controller('menuController', function($scope, data, $modal, $q){
 
     $scope.days = [
         'Montag', 'Dienstag', 'Mittwoch', 'Donnerstag', 'Freitag', 'Samstag', 'Sonntag'
@@ -17,6 +17,7 @@ zmittapp.controller('menuController', function($scope, api, $modal){
      */
     $scope.changeWeek = function(count){
         $scope.currentStartDate = $scope.currentStartDate.changeDay(count * 7);
+        $scope.updateDishes();
     };
 
     /**
@@ -24,9 +25,9 @@ zmittapp.controller('menuController', function($scope, api, $modal){
      */
     $scope.updateDishes = function(){
 
-        api('menuItem').query().then(function(data){
+        data.menuItem.get().then(function(data){
             var startDate = $scope.currentStartDate,
-                endDate = startDate.changeDay(6);
+                endDate = startDate.getLastDateOfWeek();
             $scope.dayDishes = [];
 
             data.forEach(function(m){
@@ -41,15 +42,24 @@ zmittapp.controller('menuController', function($scope, api, $modal){
         });
     };
 
+    $scope.data = data;
 
+    /**
+     * Opens a dialog for editing/creating a dish.
+     * @param model
+     */
     function openDishDialog(model){
-        var newScope = $scope.$new(true);
-        newScope.dish = model;
+        var d = $q.defer(),
+            newScope = $scope.$new(true);
+
+        newScope.dish = angular.copy(model);
         $modal.open({templateUrl: 'views/dish.html', controller: 'dishController', scope: newScope}).result.then(function(){
-            // saved
+            d.resolve(newScope.dish);
         }, function(){
-            // canceled
+            d.reject();
         });
+
+        return d.promise;
     }
 
     /**
@@ -61,11 +71,16 @@ zmittapp.controller('menuController', function($scope, api, $modal){
             date: $scope.currentStartDate.changeDay(index)
         };
 
-        openDishDialog(dish);
+        openDishDialog(dish).then(function(newDish){
+            $scope.dayDishes[index] = $scope.dayDishes[index] || [];
+            $scope.dayDishes[index].push(newDish);
+        });
     };
 
     $scope.editDish = function(dayIndex, dishIndex){
-        openDishDialog($scope.dayDishes[dayIndex][dishIndex]);
+        openDishDialog($scope.dayDishes[dayIndex][dishIndex]).then(function(updatedDish){
+            $scope.dayDishes[dayIndex][dishIndex] = updatedDish;
+        });
     };
 
 

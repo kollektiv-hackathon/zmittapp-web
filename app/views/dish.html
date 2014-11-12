@@ -1,6 +1,6 @@
 <div class="view">
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true" ng-click="cancel()">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title">Menü</h4>
     </div>
     <div class="modal-body">
@@ -34,7 +34,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal">Abbrechen</button>
+        <button type="button" class="btn btn-danger" ng-click="delete()" data-dismiss="modal">Abbrechen</button>
+        <button type="button" class="btn btn-default" ng-click="cancel()" data-dismiss="modal" ng-show="dish">Abbrechen</button>
         <button type="button" class="btn btn-primary" ng-click="save()">Speichern</button>
     </div>
 </div>

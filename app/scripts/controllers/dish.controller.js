@@ -2,18 +2,17 @@
  * Created by remo on 02/11/14.
  */
 
-zmittapp.controller('dishController', function($scope, api){
+zmittapp.controller('dishController', function($scope, data){
 
     $scope.save = function(){
-        var _api = api("menuItem"),
-            _exec;
+        var _exec;
         if(typeof $scope.dish.id !== 'undefined'){
-            _exec = _api.update;
+            _exec = data.menuItem.update;
         }else{
-            _exec = _api.create;
+            _exec = data.menuItem.create;
         }
 
-        _exec.call(_api, $scope.dish).then(function(data){
+        _exec.call(data.menuItem, $scope.dish).then(function(data){
             $scope.$close();
         });
     };
