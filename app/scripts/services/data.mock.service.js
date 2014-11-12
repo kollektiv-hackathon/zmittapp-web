@@ -46,7 +46,7 @@ zmittapp.factory('data', function($q){
         getIndex: function(model){
             for(var i = 0; i < this.data().length; i++){
                 if(this.data()[i].id === model.id){
-                    return this.data()[i];
+                    return i;
                 }
             }
 
