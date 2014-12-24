@@ -1,0 +1,64 @@
+<div class="view">
+    <div class="page-header">
+        <h1>Register</h1>
+    </div>
+
+    <div class="jumbotron">
+        <div class="row">
+
+            <div class="form-group col-sm-6">
+                <input type="text" class="form-control input-lg" placeholder="E-Mail"  ng-model="profile.email">
+            </div>
+
+            <div class="form-group  col-sm-6">
+                <input type="password" class="form-control input-lg" placeholder="Passwort">
+            </div>
+
+        </div>
+    </div>
+
+    <div class="jumbotron">
+        <div class="row">
+
+            <div class="form-group col-sm-6">
+                <input type="text" class="form-control input-lg" placeholder="Restaurant Name" ng-model="profile.name">
+            </div>
+
+            <div class="form-group col-sm-6">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">+41</span>
+                    <input type="text" class="form-control" placeholder="Telefon" ng-model="profile.phone">
+                </div>
+            </div>
+
+            <div class="form-group  col-sm-6 time">
+                <h4>Mittagsmenü Verfügbarkeit:</h4>
+                <div class="pull-left">
+                    <timepicker ng-model="tmpProfile.menustart" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                </div>
+                <div class="pull-left timelabel"> bis: </div>
+                <div class="pull-left">
+                    <timepicker ng-model="tmpProfile.menuend" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></timepicker>
+                </div>
+                <!--<input type="text" class="form-control input-lg" placeholder="Mittagsmenü Verfügbarkeit (von - bis)">-->
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="form-group col-sm-6 mapSearch">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon mapIcon"><span class="glyphicon glyphicon-map-marker"></span></span>
+                    <input type="text" class="form-control addressSuggestion" placeholder="Restaurant-Standort" >
+                </div>
+            </div>
+
+            <div class="map-container" z-map></div>
+        </div>
+
+        <button type="button" class="btn btn-primary btn-lg" ng-click="createProfile()"><span class="glyphicon glyphicon-ok"></span> &nbsp;Speichern</button>
+
+    </div>
+
+</div>
