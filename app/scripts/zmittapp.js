@@ -14,7 +14,7 @@ var zmittapp = angular.module('zmittapp', ['ngRoute', 'ngResource', 'ui.bootstra
       })
       .when('/register', {
             templateUrl: 'views/register.html',
-            controller: 'loginController'
+            controller: 'registerController'
       })
       .when('/logout', {
           templateUrl: 'views/login.html',

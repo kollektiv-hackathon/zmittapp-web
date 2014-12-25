@@ -4,9 +4,10 @@ zmittapp.controller('registerController', function($scope, $rootScope, api, $tim
     $scope.hstep = 1;
     $scope.mstep = 30;
 
-    $scope.saveProfile = function(){
-
+    $scope.createProfile = function(){
+        console.log('create clicked')
       api('restaurant').create($scope.profile).then(function(){
+          console.log('profile saved')
          messages.success('Ihr Profil wurde erstellt!');
       });
     }
