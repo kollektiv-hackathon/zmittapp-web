@@ -4,7 +4,7 @@
 
 'use strict';
 
-zmittapp.factory('auth', function(){
+zmittapp.factory('auth', function($rootScope){
 
 	return {
     	getAccessToken: function(){
@@ -22,6 +22,14 @@ zmittapp.factory('auth', function(){
 
     	login: function(username, password){
 
-    	}
+    	},
+
+        logout: function(){
+            $rootScope.oauth = null;
+        },
+
+        isLoggedIn: function(){
+            return $rootScope.oauth !== null;
+        }
   	};
 });

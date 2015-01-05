@@ -30,7 +30,18 @@ var zmittapp = angular.module('zmittapp', ['ngRoute', 'ngResource', 'ui.bootstra
       });
 
       $locationProvider.html5Mode(true);
-  });
+  })
+
+    .run(['$rootScope', '$injector', function($rootScope,$injector) {
+        $injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
+            if ($rootScope.oauth) headersGetter()['Authorization'] = "Bearer "+$rootScope.oauth.access_token;
+            if (data) {
+                console.log(data);
+                return angular.toJson(data);
+            }
+        };
+    }]);
+
 
 zmittapp.controller('rootController', function($scope, $rootScope, auth, $window, $location){
 

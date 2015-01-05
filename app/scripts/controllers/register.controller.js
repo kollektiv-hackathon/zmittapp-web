@@ -17,15 +17,16 @@ zmittapp.controller('registerController', function($scope, $rootScope, api, $tim
         $scope.profile.address = 'Rennweg 4';
 
         console.log('create clicked');
-      api('profile').create($scope.profile)
-          .success(function(){
-            messages.success('Ihr Profil wurde erstellt!');
-          })
-          .error(function(){
-              messages.error('Profil konnte nicht erstellt werden!');
-          })
-      ;
-    }
+        api('profile').create($scope.profile)
+            .success(function(data, status, headers, config) {
+                messages.success('Ihr Profil wurde erstellt!');
+                console.log(data);
+                $rootScope.oauth.access_token = data.access_token;
+            })
+            .error(function(){
+                messages.error('Profil konnte nicht erstellt werden!');
+            });
+    };
 
     // dummy data
     $scope.tmpProfile = {};
