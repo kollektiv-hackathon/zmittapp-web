@@ -21,7 +21,7 @@ zmittapp.controller('registerController', function($scope, $rootScope, api, $tim
             .success(function(data, status, headers, config) {
                 messages.success('Ihr Profil wurde erstellt!');
                 console.log(data);
-                $rootScope.oauth.access_token = data.access_token;
+                //todo: login
             })
             .error(function(){
                 messages.error('Profil konnte nicht erstellt werden!');

@@ -11,15 +11,15 @@ zmittapp.controller('loginController', function($scope, $rootScope, api, $timeou
             method: 'GET',
             url: 'http://api.zmittapp.ch/app_dev.php/' + 'oauth/v2/token',
             params: {
-                client_id: '1_461rd8pbtmaskow8w8o8k40gkwoo8gsskw44000wc4ocwogkww', // will change by calling pull.php on api server
-                client_secret: '2fhwmedl1hlwwo80s8cs0oko8ggokwc8oc4ccokgc8w4sw0cgw', // same
+                client_id: '1_3p6fcokbu204sw400sw84kwkkw40o84cog8cgc4wg0s4k0wgww', // will change by calling pull.php on api server
+                client_secret: '4ih182gn1eo08cwogoogok0c4o0c4csc84k884kwsco0ww84cw', // same
                 username: $scope.username,
                 password: $scope.password,
                 grant_type: 'password'
             }
         }).success(function(data, status, headers, config) {
             console.log(data.access_token);
-            $rootScope.oauth = new Object();
+            $rootScope.oauth = {};
             $rootScope.oauth = {
                 access_token: data.access_token,
                 expires_in: data.expires_in,

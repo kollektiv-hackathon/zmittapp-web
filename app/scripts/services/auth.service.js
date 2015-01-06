@@ -7,10 +7,6 @@
 zmittapp.factory('auth', function($rootScope){
 
 	return {
-    	getAccessToken: function(){
-      		return true;
-    	},
-
 		getId: function(){
 			var id = localStorage.getItem("restaurantId");
 			if(id == null){

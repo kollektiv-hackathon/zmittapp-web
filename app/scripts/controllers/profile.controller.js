@@ -11,7 +11,7 @@ zmittapp.controller('profileController', function($scope, $rootScope, api, $time
       });
     }
 
-    api('restaurant').get(auth.getId()).then(function(data){
+    api('profile').get().then(function(data){
 
       $scope.profile = data;
 

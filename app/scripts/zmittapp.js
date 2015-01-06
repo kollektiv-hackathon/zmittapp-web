@@ -30,17 +30,29 @@ var zmittapp = angular.module('zmittapp', ['ngRoute', 'ngResource', 'ui.bootstra
       });
 
       $locationProvider.html5Mode(true);
-  })
+  });
 
-    .run(['$rootScope', '$injector', function($rootScope,$injector) {
-        $injector.get("$http").defaults.transformRequest = function(data, headersGetter) {
-            if ($rootScope.oauth) headersGetter()['Authorization'] = "Bearer "+$rootScope.oauth.access_token;
-            if (data) {
-                console.log(data);
-                return angular.toJson(data);
+zmittapp.factory('myHttpResponseInterceptor',['$q','$location', '$rootScope',function($q,$location, $rootScope){
+    return {
+        'request': function(config) {
+            if(undefined != $rootScope.oauth && null != $rootScope.oauth){
+                var token = $rootScope.oauth.access_token;
+                config.headers =  {
+                    'Authorization': 'Bearer ' + token
+                }
+            } else {
+                if($location.path() != '/login' || $location.path() != '/register'){ //todo: comparison not working!?
+                    $location.path('/login');
+                }
             }
-        };
-    }]);
+            return config;
+        }
+    }
+}]);
+zmittapp.config(['$httpProvider',function($httpProvider) {
+    $httpProvider.interceptors.push('myHttpResponseInterceptor');
+}]);
+
 
 
 zmittapp.controller('rootController', function($scope, $rootScope, auth, $window, $location){
@@ -48,19 +60,11 @@ zmittapp.controller('rootController', function($scope, $rootScope, auth, $window
   // reset loading
   $rootScope.loading = 0;
 
+  // todo: not working correctly
   // watch for change in loading and set showLoading
-  $rootScope.$watch('loading', function(newValue){
-    $rootScope.showLoading = newValue >= 1;
-  });
-
-  $scope.$on('$locationChangeStart', function(event) {
-
-    if (auth.getAccessToken() === false && $window.location.pathname !== '/login') {
-      event.preventDefault();
-      window.location.pathname = '/login';
-      //$window.location.href = 'http://zmittapp.int/login';
-    }
-  });
+  //$rootScope.$watch('loading', function(newValue){
+  //  $rootScope.showLoading = newValue >= 1;
+  //});
 
   $scope.$on('$locationChangeSuccess', function(e){
     $scope.currentLocation = window.location.pathname;

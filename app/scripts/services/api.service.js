@@ -16,7 +16,7 @@ zmittapp.factory('api', function($rootScope, $resource, $q, auth){
         return function(entityType){
             var restPath = _urlMappings[entityType] || entityType + '/:id';
             if(typeof _cache[entityType] === 'undefined'){
-                _cache[entityType] = $resource('http://zmittapp.api/app_dev.php/' + restPath, {id:'@id'}, {
+                _cache[entityType] = $resource('http://api.zmittapp.ch/app_dev.php/' + restPath, {id:'@id'}, {
                     'update':   {method:'PUT'},
                     'create':   {method:'POST'}
                 });
