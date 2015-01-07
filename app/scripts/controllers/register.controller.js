@@ -1,5 +1,5 @@
 
-zmittapp.controller('registerController', function($scope, $rootScope, api, $timeout, auth, messages){
+zmittapp.controller('registerController', function($scope, $rootScope, api, $timeout, auth, messages, $location){
 
     $scope.hstep = 1;
     $scope.mstep = 30;
@@ -16,16 +16,21 @@ zmittapp.controller('registerController', function($scope, $rootScope, api, $tim
         $scope.profile.city = 'Zürich';
         $scope.profile.address = 'Rennweg 4';
 
-        console.log('create clicked');
         api('profile').create($scope.profile)
-            .success(function(data, status, headers, config) {
+            .then(function(data){
                 messages.success('Ihr Profil wurde erstellt!');
-                console.log(data);
-                //todo: login
-            })
-            .error(function(){
-                messages.error('Profil konnte nicht erstellt werden!');
+                auth.login($scope.profile.owner.username, $scope.profile.owner.password)
+                    .then(function(data){
+                        $rootScope.oauth = data;
+                        $location.path('/');
+                    }, function (httpError) {
+                        console.log(httpError);
+                        messages.error('Profil wurde erstellt, jedoch konnte der Loginprozess nicht durchgeführt werden. Bitte manuell einloggen.');
+                    });
+            }, function (error) {
+                console.log(error);
             });
+
     };
 
     // dummy data

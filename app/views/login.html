@@ -9,7 +9,7 @@
 
         <div style="padding-top:30px" class="panel-body" >
 
-          <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+          <div ng-show="error_description" class="alert alert-danger col-sm-12">{{ error_description }}</div>
 
           <form id="loginform" class="form-horizontal" role="form">
 
@@ -27,7 +27,7 @@
               <!-- Button -->
 
               <div class="col-sm-12 controls">
-                <a id="btn-login" ng-click="login()" class="btn btn-success">Login</a>
+                <button type="submit" id="btn-login" ng-click="login()" class="btn btn-success">Login</button>
               </div>
             </div>
 
@@ -35,7 +35,7 @@
             <div class="form-group">
               <div class="col-md-12 control">
                 <div>
-                  Don't have an account!
+                  Don't have an account?
                   <a href="/register">
                     Sign Up Here
                   </a>

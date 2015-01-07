@@ -32,20 +32,24 @@ var zmittapp = angular.module('zmittapp', ['ngRoute', 'ngResource', 'ui.bootstra
       $locationProvider.html5Mode(true);
   });
 
-zmittapp.factory('myHttpResponseInterceptor',['$q','$location', '$rootScope',function($q,$location, $rootScope){
+zmittapp.factory('myHttpResponseInterceptor',['$q','$location', '$rootScope', function($q,$location, $rootScope){
     return {
         'request': function(config) {
-            if(undefined != $rootScope.oauth && null != $rootScope.oauth){
+            if(undefined !== $rootScope.oauth && null !== $rootScope.oauth){
                 var token = $rootScope.oauth.access_token;
                 config.headers =  {
                     'Authorization': 'Bearer ' + token
                 }
-            } else {
-                if($location.path() != '/login' || $location.path() != '/register'){ //todo: comparison not working!?
-                    $location.path('/login');
-                }
             }
             return config;
+        },
+        responseError: function (rejection) {
+            console.log('Failed with', rejection.status, 'status');
+            if (rejection.status == 401 || rejection.status == 403) {
+                $location.url('/login');
+            }
+
+            return $q.reject(rejection);
         }
     }
 }]);
@@ -60,14 +64,13 @@ zmittapp.controller('rootController', function($scope, $rootScope, auth, $window
   // reset loading
   $rootScope.loading = 0;
 
+    $scope.isLoggedIn = auth.isLoggedIn;
+
+
   // todo: not working correctly
   // watch for change in loading and set showLoading
   //$rootScope.$watch('loading', function(newValue){
   //  $rootScope.showLoading = newValue >= 1;
   //});
-
-  $scope.$on('$locationChangeSuccess', function(e){
-    $scope.currentLocation = window.location.pathname;
-  });
 
 });

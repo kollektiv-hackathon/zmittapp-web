@@ -44,7 +44,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="loader-bg" ng-show="showLoading"><div class="loader"></div></div>
+    <!-- <div class="loader-bg" ng-show="showLoading"><div class="loader"></div></div> -->
 
     <div class="messages" z-messages></div>
 
@@ -66,7 +66,7 @@
               <li><a href="/profile">Profil</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href="/logout">Logout</a></li>
+              <li ng-show="auth.isLoggedIn()"><a href="/logout">Logout</a></li>
               <li><a href="/register">Register</a></li>
             </ul>
           </div>
