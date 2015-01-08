@@ -1,9 +1,8 @@
 
-zmittapp.controller('logoutController', function($scope, $location, messages){
+zmittapp.controller('logoutController', function($scope, $location, messages, auth){
 
   // destroy session cookie
-
-  messages.info('Sie wurden erfolgreich ausgeloggt.');
-
-  $location.path( "/login" ).replace();
+    auth.logout();
+    messages.info('Sie wurden erfolgreich ausgeloggt.');
+    $location.path( "/login" ).replace();
 });

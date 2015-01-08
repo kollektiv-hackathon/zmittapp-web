@@ -17,6 +17,7 @@ zmittapp.factory('auth', function($rootScope, $http){
 		},
 
     	login: function(username, password){
+            $rootScope.loading += 1;
             // returns a promise that returns the oauth object or error data
             return $http({
                 method: 'GET',
@@ -31,6 +32,7 @@ zmittapp.factory('auth', function($rootScope, $http){
             })
             .then(
             function (response) {
+                $rootScope.loading -= 1;
                 return {
                     access_token: response.data.access_token,
                     expires_in: response.data.expires_in,
@@ -40,6 +42,7 @@ zmittapp.factory('auth', function($rootScope, $http){
                 };
             },
             function (httpError) {
+                $rootScope.loading -= 1;
                 throw httpError;
             });
 
@@ -50,8 +53,10 @@ zmittapp.factory('auth', function($rootScope, $http){
         },
 
         isLoggedIn: function(){
-            console.log($rootScope.oauth);
-            return $rootScope.oauth.access_token !== null;
+            if($rootScope.oauth && $rootScope.oauth.access_token){
+                return true;
+            }
+            return false;
         }
   	};
 });
