@@ -64,13 +64,11 @@ zmittapp.controller('rootController', function($scope, $rootScope, auth, $window
   // reset loading
   $rootScope.loading = 0;
 
-    $scope.isLoggedIn = auth.isLoggedIn;
+  $rootScope.auth = auth;
 
-
-  // todo: not working correctly
   // watch for change in loading and set showLoading
-  //$rootScope.$watch('loading', function(newValue){
-  //  $rootScope.showLoading = newValue >= 1;
-  //});
+  $rootScope.$watch('loading', function(newValue){
+    $rootScope.showLoading = newValue >= 1;
+  });
 
 });

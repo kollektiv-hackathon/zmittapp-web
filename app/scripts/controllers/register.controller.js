@@ -24,7 +24,6 @@ zmittapp.controller('registerController', function($scope, $rootScope, api, $tim
                         $rootScope.oauth = data;
                         $location.path('/');
                     }, function (httpError) {
-                        console.log(httpError);
                         messages.error('Profil wurde erstellt, jedoch konnte der Loginprozess nicht durchgeführt werden. Bitte manuell einloggen.');
                     });
             }, function (error) {

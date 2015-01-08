@@ -68,6 +68,9 @@ zmittapp.factory('api', function($rootScope, $resource, $q, auth){
             m.$create(function(data){
                 d.resolve(data);
                 $rootScope.loading -= 1;
+            }, function(error){
+                d.reject(error);
+                $rootScope.loading -= 1;
             });
 
             return d.promise;
@@ -79,6 +82,9 @@ zmittapp.factory('api', function($rootScope, $resource, $q, auth){
             var m = new this.res(wrapModel(model, this.entityType));
             m.$update(function(data){
                 d.resolve(data);
+                $rootScope.loading -= 1;
+            }, function(error){
+                d.reject(error);
                 $rootScope.loading -= 1;
             });
 
@@ -94,6 +100,9 @@ zmittapp.factory('api', function($rootScope, $resource, $q, auth){
 
             this.res.get({id: id}, function(data){
                 d.resolve(data);
+                $rootScope.loading -= 1;
+            }, function(error){
+                d.reject(error);
                 $rootScope.loading -= 1;
             });
             return d.promise;
