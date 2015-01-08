@@ -6,7 +6,9 @@ zmittapp.controller('registerController', function($scope, $rootScope, api, $tim
 
     $scope.createProfile = function(){
 
-        $scope.profile.email = $scope.profile.owner.username;
+        if($scope.profile.owner && $scope.profile.owner.username){
+            $scope.profile.email = $scope.profile.owner.username;
+        }
 
         //dummy data
         $scope.profile.lon = '42';
