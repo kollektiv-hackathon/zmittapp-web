@@ -80,8 +80,17 @@ zmittapp.directive('zMap', function($rootScope){
         $scope.map.setZoom(15); 
       }
 
+         if(!$scope.profile){
+             $scope.profile = {};
+         }
+         var address_components = place.address_components;
+
       $scope.profile.lat = place.geometry.location.lat();
       $scope.profile.lon = place.geometry.location.lng();
+      $scope.profile.country = address_components[6].short_name; //CH
+      $scope.profile.zip = address_components[7].short_name; //8001
+      $scope.profile.city = address_components[5].long_name; //Zürich
+      $scope.profile.address = address_components[1].long_name + ' ' + address_components[0].long_name; //Rennweg 4
 
       $scope.marker.setPosition(place.geometry.location);
       $scope.marker.setVisible(true);

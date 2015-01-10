@@ -6,17 +6,9 @@ zmittapp.controller('registerController', function($scope, $rootScope, api, $tim
 
     $scope.createProfile = function(){
 
-        if($scope.profile.owner && $scope.profile.owner.username){
+        if($scope.profile && $scope.profile.owner && $scope.profile.owner.username){
             $scope.profile.email = $scope.profile.owner.username;
         }
-
-        //dummy data
-        $scope.profile.lon = '42';
-        $scope.profile.lat = '42';
-        $scope.profile.country = 'CH';
-        $scope.profile.zip = '8001';
-        $scope.profile.city = 'Zürich';
-        $scope.profile.address = 'Rennweg 4';
 
         api('profile').create($scope.profile)
             .then(function(data){

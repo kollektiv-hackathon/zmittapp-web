@@ -23,8 +23,8 @@ zmittapp.factory('auth', function($rootScope, $http){
                 method: 'GET',
                 url: 'http://api.zmittapp.ch/app_dev.php/' + 'oauth/v2/token',
                 params: {
-                    client_id: '1_3p6fcokbu204sw400sw84kwkkw40o84cog8cgc4wg0s4k0wgww', // will change by calling pull.php on api server
-                    client_secret: '4ih182gn1eo08cwogoogok0c4o0c4csc84k884kwsco0ww84cw', // same
+                    client_id: '1_32lys5v98xkwk80osss48cs0w0w8g8okcs0s88wo0gwokssgwk', // will change by calling pull.php on api server
+                    client_secret: '21ax6r2vbqn4osg0s0k8sgg0c4kck4sosggwkkg4oswkg880cs', // same
                     username: username,
                     password: password,
                     grant_type: 'password'
